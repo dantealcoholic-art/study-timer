@@ -7,9 +7,10 @@ function createWindow() {
     height: 420,
     minWidth: 320,
     minHeight: 300,
+    frame: false,
     backgroundColor: "#000000",
-    autoHideMenuBar: true,
     title: "Study Timer",
+    icon: path.join(__dirname, "icon.png"),
     webPreferences: { contextIsolation: true },
   });
   win.loadFile(path.join(__dirname, "index.html"));
