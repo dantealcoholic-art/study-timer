@@ -32,6 +32,24 @@
   .modes { display: flex; gap: 6px; opacity: 0; transition: opacity .2s; }
   .topbar:hover .modes { opacity: 1; }
 
+  /* Frameless window: the top strip drags the window; buttons inside it stay clickable */
+  .topbar { -webkit-app-region: drag; }
+  .modes, .close { -webkit-app-region: no-drag; }
+  .close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border: none;
+    background: transparent;
+    color: #a78bfa;
+    font-size: 16px;
+    padding: 2px 8px;
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .topbar:hover .close { opacity: 1; }
+  .close:hover { color: #fff; background: transparent; }
+
   #display {
     font-size: clamp(56px, 13vw, 120px);
     font-variant-numeric: tabular-nums;
@@ -92,6 +110,7 @@
       <button id="modeTimer" class="active">Timer</button>
       <button id="modeStopwatch">Stopwatch</button>
     </div>
+    <button id="close" class="close" title="Close">✕</button>
   </div>
 
   <div id="display">25:00.00</div>
@@ -234,6 +253,8 @@
 
   modeTimer.addEventListener("click", () => setMode("timer"));
   modeStopwatch.addEventListener("click", () => setMode("stopwatch"));
+
+  document.getElementById("close").addEventListener("click", () => window.close());
 
   document.addEventListener("keydown", e => {
     if (e.code === "Space") { e.preventDefault(); mainBtn.click(); }
